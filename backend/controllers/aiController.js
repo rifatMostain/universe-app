@@ -516,6 +516,10 @@ Make the recommendations personalized, practical, and specifically relevant to B
  */
 exports.generateSOP = async (req, res) => {
   try {
+    // Log API key status (for debugging)
+    console.log('Gemini API Key configured:', !!process.env.GEMINI_API_KEY);
+    console.log('API Key length:', process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.length : 0);
+    
     const {
       targetUniversity,
       program,
@@ -535,6 +539,7 @@ exports.generateSOP = async (req, res) => {
       return res.status(400).json({ error: 'Required fields are missing' });
     }
 
+    console.log('Attempting to initialize Gemini model: gemini-2.5-flash');
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     const prompt = `You are an expert SOP (Statement of Purpose) writer with extensive experience helping international students craft compelling applications for top universities worldwide. Your task is to create a well-structured, professional, and personalized Statement of Purpose.
@@ -618,18 +623,30 @@ Create a compelling, personalized SOP that stands out while remaining authentic 
 
 IMPORTANT: Output should be plain text essay format without any markdown, asterisks, or special formatting characters. Write it as you would submit it to a university - professional prose only.`;
 
+    console.log('Sending request to Gemini API...');
     const result = await model.generateContent(prompt);
     const sop = result.response.text();
 
+    console.log('SOP generated successfully, length:', sop.length);
     res.json({ 
       success: true,
       sop: sop
     });
   } catch (error) {
-    console.error('Error generating SOP:', error.message);
+    console.error('=== SOP Generation Error ===');
+    console.error('Error message:', error.message);
+    console.error('Error name:', error.name);
+    console.error('Error stack:', error.stack);
+    if (error.response) {
+      console.error('API Response Status:', error.response.status);
+      console.error('API Response Data:', error.response.data);
+    }
+    console.error('=========================');
+    
     res.status(500).json({ 
       error: 'Failed to generate SOP', 
-      details: error.message 
+      details: error.message,
+      errorType: error.name
     });
   }
 };
