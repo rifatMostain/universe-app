@@ -184,13 +184,9 @@ const ProfileForm = ({ profile, onSave, onCancel }) => {
         }
       };
 
-      console.log('Sending payload:', payload);
       const response = await api.put('/profile', payload);
-      console.log('Response:', response.data);
       onSave();
     } catch (err) {
-      console.error('Profile update error:', err);
-      console.error('Error response:', err.response);
       setError(err.response?.data?.message || err.message || 'Failed to update profile');
     } finally {
       setLoading(false);

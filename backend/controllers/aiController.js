@@ -516,9 +516,6 @@ Make the recommendations personalized, practical, and specifically relevant to B
  */
 exports.generateSOP = async (req, res) => {
   try {
-    console.log('=== SOP Generation Request ===');
-    console.log('Request body:', req.body);
-    
     const {
       targetUniversity,
       program,
@@ -535,11 +532,9 @@ exports.generateSOP = async (req, res) => {
     } = req.body;
 
     if (!targetUniversity || !program || !degreeLevel || !background || !careerGoals || !whyThisProgram || !whyThisUniversity) {
-      console.log('Missing required fields');
       return res.status(400).json({ error: 'Required fields are missing' });
     }
 
-    console.log('Initializing Gemini model...');
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     const prompt = `You are an expert SOP (Statement of Purpose) writer with extensive experience helping international students craft compelling applications for top universities worldwide. Your task is to create a well-structured, professional, and personalized Statement of Purpose.
@@ -623,19 +618,15 @@ Create a compelling, personalized SOP that stands out while remaining authentic 
 
 IMPORTANT: Output should be plain text essay format without any markdown, asterisks, or special formatting characters. Write it as you would submit it to a university - professional prose only.`;
 
-    console.log('Generating SOP with Gemini AI...');
     const result = await model.generateContent(prompt);
     const sop = result.response.text();
-    
-    console.log('SOP generated successfully, length:', sop.length);
 
     res.json({ 
       success: true,
       sop: sop
     });
   } catch (error) {
-    console.error('❌ Error generating SOP:', error);
-    console.error('Error stack:', error.stack);
+    console.error('Error generating SOP:', error.message);
     res.status(500).json({ 
       error: 'Failed to generate SOP', 
       details: error.message 

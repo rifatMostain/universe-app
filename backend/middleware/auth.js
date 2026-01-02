@@ -97,7 +97,6 @@ const optionalAuth = async (req, res, next) => {
     }
   } catch (error) {
     // Silently fail - user is not authenticated but that's okay
-    console.log('Optional auth failed, continuing as unauthenticated');
   }
   
   next();
