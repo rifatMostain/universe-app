@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import api from '../utils/api';
 import '../styles/Chatbot.css';
 
 const parseMessageWithFormatting = (text) => {
@@ -75,17 +76,10 @@ const Chatbot = ({ onClose }) => {
       
       if (token && user) {
         // Load from backend for logged-in users
-        const response = await fetch('/api/ai/chat-history', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+        const response = await api.get('/ai/chat-history');
         
-        if (response.ok) {
-          const data = await response.json();
-          if (data.messages && data.messages.length > 0) {
-            setMessages(data.messages);
-          }
+        if (response.data.messages && response.data.messages.length > 0) {
+          setMessages(response.data.messages);
         }
       } else {
         // Load from sessionStorage for anonymous users
@@ -105,14 +99,7 @@ const Chatbot = ({ onClose }) => {
     if (token && user) {
       // Save to backend for logged-in users
       try {
-        await fetch('/api/ai/save-message', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ role, content })
-        });
+        await api.post('/ai/save-message', { role, content });
       } catch (error) {
         console.error('Error saving message to backend:', error);
       }
@@ -157,6 +144,10 @@ const Chatbot = ({ onClose }) => {
       const token = localStorage.getItem('token');
       const isLoggedIn = !!token;
       
+      // Build the full URL for streaming
+      const baseURL = import.meta.env.VITE_API_URL || '/api';
+      const chatURL = `${baseURL}/ai/chat`;
+      
       const headers = {
         'Content-Type': 'application/json'
       };
@@ -165,7 +156,7 @@ const Chatbot = ({ onClose }) => {
         headers['Authorization'] = `Bearer ${token}`;
       }
       
-      const response = await fetch('/api/ai/chat', {
+      const response = await fetch(chatURL, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -262,12 +253,7 @@ const Chatbot = ({ onClose }) => {
     if (token && user) {
       // Clear from backend for logged-in users
       try {
-        await fetch('/api/ai/chat-history', {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+        await api.delete('/ai/chat-history');
       } catch (error) {
         console.error('Error clearing chat history:', error);
       }
