@@ -52,10 +52,14 @@ app.get('/api/health', (req, res) => {
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const aiRoutes = require('./routes/ai');
+const universityRecommendationRoutes = require('./routes/universityRecommendations');
+const applicationGuidanceRoutes = require('./routes/applicationGuidance');
 
 app.use('/api/auth', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/universities', universityRecommendationRoutes);
+app.use('/api/application-guidance', applicationGuidanceRoutes);
 
 // MongoDB Connection
 const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/universe';

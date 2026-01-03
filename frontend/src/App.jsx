@@ -9,6 +9,8 @@ import ScholarshipInfo from './pages/ScholarshipInfo'
 import Profile from './pages/Profile'
 import ChatPage from './pages/ChatPage'
 import CountryQuiz from './pages/CountryQuiz'
+import UniversityRecommendations from './pages/UniversityRecommendations'
+import ApplicationGuidance from './pages/ApplicationGuidance'
 import Login from './pages/auth/Login'
 import SignUp from './pages/auth/SignUp'
 import Chatbot from './components/Chatbot'
@@ -46,15 +48,30 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/scholarships" element={<ScholarshipInfo />} />
             <Route path="/chatbot" element={<ChatPage />} />
-            <Route path="/country-quiz" element={<CountryQuiz />} />
+            <Route path="/application-guidance" element={<ApplicationGuidance />} />
             
             {/* Protected Routes - Require Login */}
+            <Route path="/country-quiz" element={
+              <ProtectedRoute>
+                <CountryQuiz />
+              </ProtectedRoute>
+            } />
+            <Route path="/university-recommendations" element={
+              <ProtectedRoute>
+                <UniversityRecommendations />
+              </ProtectedRoute>
+            } />
             <Route path="/profile" element={
               <ProtectedRoute>
                 <Profile />
               </ProtectedRoute>
             } />
             <Route path="/sop-cv" element={
+              <ProtectedRoute>
+                <SOPHelper />
+              </ProtectedRoute>
+            } />
+            <Route path="/sop-helper" element={
               <ProtectedRoute>
                 <SOPHelper />
               </ProtectedRoute>

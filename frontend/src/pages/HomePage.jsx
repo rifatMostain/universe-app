@@ -42,6 +42,14 @@ const HomePage = () => {
     },
     {
       id: 2,
+      icon: '�',
+      title: 'Application Guide',
+      description: 'Get comprehensive step-by-step guidance for your entire application journey - from admission to visa, tailored to your destination.',
+      link: '/application-guidance',
+      color: '#10b981'
+    },
+    {
+      id: 3,
       icon: '💬',
       title: 'AI Chatbot',
       description: 'Get instant, accurate answers to all your study abroad questions. Available 24/7 with no login required.',
@@ -49,7 +57,7 @@ const HomePage = () => {
       color: '#0891b2'
     },
     {
-      id: 3,
+      id: 4,
       icon: '💰',
       title: 'Scholarship Finder',
       description: 'Access comprehensive scholarship database with filtering options. Find funding opportunities that match your profile.',
@@ -57,7 +65,15 @@ const HomePage = () => {
       color: '#7c3aed'
     },
     {
-      id: 4,
+      id: 5,
+      icon: '🎓',
+      title: 'University Finder',
+      description: 'Get AI-powered personalized university recommendations based on your academic profile, budget, and career goals.',
+      link: '/university-recommendations',
+      color: '#8b5cf6'
+    },
+    {
+      id: 6,
       icon: '📝',
       title: 'SOP Assistant',
       description: 'Generate compelling Statement of Purpose with AI. Tailor your SOP for specific universities and programs.',
@@ -65,7 +81,7 @@ const HomePage = () => {
       color: '#dc2626'
     },
     {
-      id: 5,
+      id: 7,
       icon: '👨‍🏫',
       title: 'Professor Finder',
       description: 'Find professors in your research field, get contact details, and learn how to write effective cold emails.',
@@ -73,7 +89,7 @@ const HomePage = () => {
       color: '#ea580c'
     },
     {
-      id: 6,
+      id: 8,
       icon: '📊',
       title: 'Profile Builder',
       description: 'Build your academic profile, track applications, and get personalized recommendations based on your credentials.',

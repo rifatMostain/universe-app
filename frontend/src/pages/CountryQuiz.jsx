@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import api from '../utils/api';
 import '../styles/CountryQuiz.css';
 
 const DestinationFinder = () => {
@@ -8,10 +9,15 @@ const DestinationFinder = () => {
   const [recommendations, setRecommendations] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Scroll to top whenever page changes
+  // Scroll to top whenever page changes or results are shown
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentPage]);
+    // Also scroll the main container to top
+    const container = document.querySelector('.country-quiz-container');
+    if (container) {
+      container.scrollTop = 0;
+    }
+  }, [currentPage, showResults]);
 
   const quizPages = [
     {
@@ -267,6 +273,8 @@ const DestinationFinder = () => {
 
   const handleNextPage = () => {
     if (currentPage < quizPages.length - 1) {
+      // Scroll to top immediately before changing page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setCurrentPage(currentPage + 1);
     } else {
       // Quiz completed, get recommendations
@@ -276,6 +284,8 @@ const DestinationFinder = () => {
 
   const handlePreviousPage = () => {
     if (currentPage > 0) {
+      // Scroll to top immediately before changing page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setCurrentPage(currentPage - 1);
     }
   };
@@ -287,19 +297,26 @@ const DestinationFinder = () => {
 
   const getRecommendations = async (quizAnswers) => {
     setLoading(true);
+    console.log('🚀 Getting country recommendations...', quizAnswers);
+    
     try {
-      const response = await fetch('/api/ai/country-recommendations', {
+      // Use streaming API
+      const response = await fetch(`${import.meta.env.VITE_API_URL || '/api'}/ai/country-recommendations`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
         },
         body: JSON.stringify({ answers: quizAnswers })
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get recommendations');
+        const errorText = await response.text();
+        console.error('❌ API Error:', response.status, errorText);
+        throw new Error(`Failed to get recommendations: ${response.status}`);
       }
 
+      console.log('✅ Response received, reading stream...');
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let fullResponse = '';
@@ -328,11 +345,12 @@ const DestinationFinder = () => {
         }
       }
 
+      console.log('✅ Streaming complete. Response length:', fullResponse.length);
       setRecommendations(fullResponse);
       setShowResults(true);
     } catch (error) {
-      console.error('Error getting recommendations:', error);
-      setRecommendations('Sorry, we encountered an error. Please try again.');
+      console.error('❌ Error getting recommendations:', error);
+      setRecommendations(`Sorry, we encountered an error getting recommendations. Please try again.\n\nError: ${error.message}`);
       setShowResults(true);
     } finally {
       setLoading(false);

@@ -88,6 +88,40 @@
     right: 16px;
     width: 56px;
     height: 56px;
+    padding: 0;
+    border-radius: 50%;
+  }
+  
+  .chatbot-toggle-text {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .chatbot-toggle-btn {
+    bottom: 12px;
+    right: 12px;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 3px 10px rgba(5, 150, 105, 0.4);
+  }
+  
+  .chatbot-toggle-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .chatbot-toggle-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.5);
+  }
+  
+  .chatbot-toggle-btn.open {
+    box-shadow: 0 3px 10px rgba(220, 38, 38, 0.4);
+  }
+  
+  .chatbot-toggle-btn.open:hover {
+    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.5);
   }
 }
 
