@@ -368,6 +368,10 @@ const HomePage = () => {
             <a href="#contact">Contact</a>
           </div>
         </div>
+        
+        <div className="footer-creator">
+          <p>Created with ❤️ by <strong>Mostain Billa Rifat</strong> • CSE 21, RUET</p>
+        </div>
       </footer>
     </div>
   );

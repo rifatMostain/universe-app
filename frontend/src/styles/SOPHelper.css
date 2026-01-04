@@ -83,13 +83,13 @@
 .alert-error {
   background: #fee;
   border: 1px solid #fcc;
-  color: #c33;
+  color: #991b1b !important;
 }
 
 .alert-success {
   background: #efe;
   border: 1px solid #cfc;
-  color: #3c3;
+  color: #166534 !important;
 }
 
 /* Layout */
@@ -123,7 +123,7 @@
 .section-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #111827 !important;
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
@@ -135,7 +135,7 @@
 }
 
 .section-subtitle {
-  color: #6b7280;
+  color: #374151 !important;
   font-size: 0.95rem;
 }
 
@@ -154,7 +154,7 @@
 .form-label-sop {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #374151;
+  color: #111827 !important;
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
@@ -261,8 +261,16 @@
 }
 
 .sop-textarea::placeholder {
-  color: #9ca3af;
+  color: #6b7280 !important;
   font-style: italic;
+}
+
+.sop-textarea {
+  color: #111827 !important;
+}
+
+.form-input-sop, .form-textarea-sop {
+  color: #111827 !important;
 }
 
 /* SOP Actions */
@@ -326,7 +334,7 @@
 .tips-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #065f46;
+  color: #065f46 !important;
   margin-bottom: 1rem;
 }
 
@@ -342,7 +350,7 @@
 .tips-list li {
   padding-left: 1.75rem;
   position: relative;
-  color: #047857;
+  color: #065f46 !important;
   font-size: 0.9rem;
   line-height: 1.6;
 }

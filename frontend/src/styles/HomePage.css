@@ -307,6 +307,18 @@
   background: linear-gradient(to bottom, #ffffff, #f9fafb);
 }
 
+.features-showcase .section-header {
+  color: #0a1628;
+}
+
+.features-showcase .section-title-modern {
+  color: #0a1628 !important;
+}
+
+.features-showcase .section-description {
+  color: #374151 !important;
+}
+
 .section-header {
   text-align: center;
   max-width: 800px;
@@ -461,6 +473,18 @@
   background: white;
 }
 
+.how-it-works .section-header {
+  color: #0a1628;
+}
+
+.how-it-works .section-title-modern {
+  color: #0a1628;
+}
+
+.how-it-works .section-badge {
+  color: #059669;
+}
+
 .process-timeline {
   max-width: 1200px;
   margin: 0 auto;
@@ -518,13 +542,26 @@
 .step-content h3 {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #0a1628;
+  color: #0a1628 !important;
   margin-bottom: 0.75rem;
 }
 
 .step-content p {
-  color: #6b7280;
+  color: #374151 !important;
   line-height: 1.7;
+}
+
+/* Extra specificity for step content visibility */
+.how-it-works .step-content h3,
+.process-timeline .step-content h3,
+.process-step .step-content h3 {
+  color: #0a1628 !important;
+}
+
+.how-it-works .step-content p,
+.process-timeline .step-content p,
+.process-step .step-content p {
+  color: #374151 !important;
 }
 
 .timeline-connector {
@@ -548,6 +585,18 @@
 .testimonials-section {
   padding: 6rem 2rem;
   background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+}
+
+.testimonials-section .section-header {
+  color: #0a1628;
+}
+
+.testimonials-section .section-title-modern {
+  color: #0a1628 !important;
+}
+
+.testimonials-section .section-badge {
+  color: #059669 !important;
 }
 
 .testimonials-grid {
@@ -784,6 +833,10 @@
   font-size: 0.95rem;
 }
 
+.footer-links {
+  display: contents;
+}
+
 .footer-column h4 {
   font-size: 1.1rem;
   font-weight: 700;
@@ -835,4 +888,21 @@
 
 .footer-bottom-links a:hover {
   color: #10b981;
+}
+
+.footer-creator {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-creator p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.footer-creator strong {
+  color: #10b981;
+  font-weight: 700;
 }

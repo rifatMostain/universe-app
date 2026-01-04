@@ -1,0 +1,206 @@
+/* Auth Pages Animation Styles */
+
+/* Background Animation */
+.auth-page-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-page-bg::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent);
+  border-radius: 50%;
+  top: -10%;
+  left: -10%;
+  animation: floatBubble1 15s ease-in-out infinite;
+}
+
+.auth-page-bg::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(5, 150, 105, 0.12), transparent);
+  border-radius: 50%;
+  bottom: -10%;
+  right: -10%;
+  animation: floatBubble2 12s ease-in-out infinite;
+}
+
+@keyframes floatBubble1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(30px, -30px) scale(1.1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-20px, -60px) scale(0.9);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(40px, -40px) scale(1.05);
+    opacity: 0.45;
+  }
+}
+
+@keyframes floatBubble2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  33% {
+    transform: translate(-40px, 30px) scale(1.15);
+    opacity: 0.5;
+  }
+  66% {
+    transform: translate(30px, 50px) scale(0.95);
+    opacity: 0.4;
+  }
+}
+
+/* Card Animation */
+.auth-card-animate {
+  animation: slideUpFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 10;
+}
+
+@keyframes slideUpFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Stagger animation for form elements */
+.auth-card-animate > div {
+  animation: fadeInUp 0.5s ease-out backwards;
+}
+
+.auth-card-animate > div:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.auth-card-animate > form {
+  animation: fadeInUp 0.5s ease-out backwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Input focus animation */
+.auth-card-animate input:focus {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1.01);
+}
+
+/* Button hover enhancement */
+.auth-card-animate button[type="submit"] {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.auth-card-animate button[type="submit"]:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
+}
+
+.auth-card-animate button[type="submit"]:not(:disabled):active {
+  transform: translateY(0);
+}
+
+/* Link hover animation */
+.auth-card-animate a {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.auth-card-animate a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+.auth-card-animate a:hover::after {
+  width: 100%;
+}
+
+/* Error message animation */
+.auth-card-animate .bg-red-50 {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+/* Loading spinner on button */
+.auth-card-animate button[type="submit"]:disabled {
+  opacity: 0.7;
+}
+
+/* Responsive animations */
+@media (max-width: 640px) {
+  .auth-page-bg::before,
+  .auth-page-bg::after {
+    width: 300px;
+    height: 300px;
+  }
+  
+  @keyframes slideUpFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+/* Add subtle glow to the card */
+.auth-card-animate {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 
+              0 0 40px rgba(16, 185, 129, 0.1);
+}
+
+/* Smooth transitions for all interactive elements */
+.auth-card-animate input,
+.auth-card-animate button,
+.auth-card-animate a {
+  transition: all 0.3s ease;
+}

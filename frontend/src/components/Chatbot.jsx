@@ -269,10 +269,15 @@ const Chatbot = ({ onClose }) => {
     <div className="chatbot-container">
       <div className="chatbot-header">
         <div className="chatbot-header-left">
+          <button onClick={onClose} className="back-btn" title="Back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
           <div className="chatbot-icon">🤖</div>
           <div>
-            <h2>AI University Counselor</h2>
-            <span className="chatbot-status">● Online</span>
+            <h2>UniVerse AI</h2>
+            <span className="chatbot-status">online</span>
           </div>
         </div>
         <div className="chatbot-header-actions">
@@ -282,17 +287,8 @@ const Chatbot = ({ onClose }) => {
             disabled={messages.length === 0}
             title="Clear Chat"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-          <button 
-            onClick={onClose} 
-            className="chatbot-close-btn"
-            title="Close"
-          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         </div>
@@ -356,7 +352,7 @@ const Chatbot = ({ onClose }) => {
           type="text"
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
-          placeholder="Ask me anything about studying abroad..."
+          placeholder="Type your message..."
           className="chatbot-input"
           disabled={isLoading}
         />
@@ -364,8 +360,18 @@ const Chatbot = ({ onClose }) => {
           type="submit" 
           className="send-button"
           disabled={isLoading || !inputMessage.trim()}
+          title="Send message"
         >
-          {isLoading ? '⏳' : '📤'}
+          {isLoading ? (
+            <svg className="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" opacity="0.25"/>
+              <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          )}
         </button>
       </form>
 

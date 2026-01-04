@@ -8,6 +8,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -21,6 +22,10 @@ const Navbar = () => {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
+  };
+
+  const toggleToolsDropdown = () => {
+    setIsToolsDropdownOpen(!isToolsDropdownOpen);
   };
 
   return (
@@ -40,33 +45,74 @@ const Navbar = () => {
             <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>
               Home
             </Link>
-            <Link to="/application-guidance" className={`nav-link ${location.pathname === '/application-guidance' ? 'active' : ''}`}>
-              Application Guide
+            <Link to="/chatbot" className={`nav-link ${location.pathname === '/chatbot' ? 'active' : ''}`}>
+              AI Chatbot
             </Link>
             <Link to="/scholarships" className={`nav-link ${location.pathname === '/scholarships' ? 'active' : ''}`}>
               Scholarships
             </Link>
-            <Link to="/chatbot" className={`nav-link ${location.pathname === '/chatbot' ? 'active' : ''}`}>
-              AI Chatbot
-            </Link>
             {user && (
-              <>
-                <Link to="/country-quiz" className={`nav-link ${location.pathname === '/country-quiz' ? 'active' : ''}`}>
-                  Destination Finder
-                </Link>
-                <Link to="/profile" className={`nav-link ${location.pathname === '/profile' ? 'active' : ''}`}>
-                  My Profile
-                </Link>
-                <Link to="/university-recommendations" className={`nav-link ${location.pathname === '/university-recommendations' ? 'active' : ''}`}>
-                  University Finder
-                </Link>
-                <Link to="/sop-cv" className={`nav-link ${location.pathname === '/sop-cv' || location.pathname === '/sop-helper' ? 'active' : ''}`}>
-                  SOP Assistant
-                </Link>
-                <Link to="/professor-finder" className={`nav-link ${location.pathname === '/professor-finder' ? 'active' : ''}`}>
-                  Professor Finder
-                </Link>
-              </>
+              <div 
+                className="dropdown-container"
+                onMouseEnter={() => setIsToolsDropdownOpen(true)}
+                onMouseLeave={() => setIsToolsDropdownOpen(false)}
+              >
+                <button 
+                  className="nav-link dropdown-trigger"
+                >
+                  Tools
+                  <svg 
+                    className={`dropdown-arrow ${isToolsDropdownOpen ? 'open' : ''}`}
+                    width="12" 
+                    height="12" 
+                    viewBox="0 0 12 12" 
+                    fill="none"
+                  >
+                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+                {isToolsDropdownOpen && (
+                  <div className="dropdown-menu">
+                    <Link 
+                      to="/country-quiz" 
+                      className="dropdown-item"
+                      onClick={() => setIsToolsDropdownOpen(false)}
+                    >
+                      <span className="dropdown-icon">🧭</span>
+                      Destination Finder
+                    </Link>
+                    <Link 
+                      to="/university-recommendations" 
+                      className="dropdown-item"
+                      onClick={() => setIsToolsDropdownOpen(false)}
+                    >
+                      <span className="dropdown-icon">🎓</span>
+                      University Finder
+                    </Link>
+                    <Link 
+                      to="/sop-cv" 
+                      className="dropdown-item"
+                      onClick={() => setIsToolsDropdownOpen(false)}
+                    >
+                      <span className="dropdown-icon">📝</span>
+                      SOP Assistant
+                    </Link>
+                    <Link 
+                      to="/application-guidance" 
+                      className="dropdown-item"
+                      onClick={() => setIsToolsDropdownOpen(false)}
+                    >
+                      <span className="dropdown-icon">📋</span>
+                      Application Guide
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
+            {user && (
+              <Link to="/profile" className={`nav-link ${location.pathname === '/profile' ? 'active' : ''}`}>
+                My Profile
+              </Link>
             )}
           </div>
 
@@ -74,8 +120,8 @@ const Navbar = () => {
           <div className="auth-buttons">
             {user ? (
               <>
-                <span className="user-greeting">Hello, {user.name}!</span>
-                <button onClick={handleLogout} className="login-btn">
+                <span className="user-greeting">{user.name}</span>
+                <button onClick={handleLogout} className="logout-btn">
                   Logout
                 </button>
               </>
@@ -131,17 +177,14 @@ const Navbar = () => {
                 <Link to="/country-quiz" className={`mobile-nav-link ${location.pathname === '/country-quiz' ? 'active' : ''}`} onClick={closeMobileMenu}>
                   Destination Finder
                 </Link>
-                <Link to="/profile" className={`mobile-nav-link ${location.pathname === '/profile' ? 'active' : ''}`} onClick={closeMobileMenu}>
-                  My Profile
-                </Link>
                 <Link to="/university-recommendations" className={`mobile-nav-link ${location.pathname === '/university-recommendations' ? 'active' : ''}`} onClick={closeMobileMenu}>
                   University Finder
                 </Link>
                 <Link to="/sop-cv" className={`mobile-nav-link ${location.pathname === '/sop-cv' || location.pathname === '/sop-helper' ? 'active' : ''}`} onClick={closeMobileMenu}>
                   SOP Assistant
                 </Link>
-                <Link to="/professor-finder" className={`mobile-nav-link ${location.pathname === '/professor-finder' ? 'active' : ''}`} onClick={closeMobileMenu}>
-                  Professor Finder
+                <Link to="/profile" className={`mobile-nav-link ${location.pathname === '/profile' ? 'active' : ''}`} onClick={closeMobileMenu}>
+                  My Profile
                 </Link>
               </>
             )}

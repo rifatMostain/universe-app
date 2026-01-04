@@ -11,8 +11,16 @@ const DestinationFinder = () => {
 
   // Scroll to top whenever page changes or results are shown
   useEffect(() => {
+    // Scroll the main-content container to top
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+      mainContent.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Also scroll window as fallback
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Also scroll the main container to top
+    
+    // Scroll the quiz container if it exists
     const container = document.querySelector('.country-quiz-container');
     if (container) {
       container.scrollTop = 0;
