@@ -347,17 +347,14 @@ const DestinationFinder = () => {
                 fullResponse += parsed.text;
               }
             } catch (e) {
-              console.error('Parse error:', e);
+              // Ignore parse errors
             }
           }
         }
       }
-
-      console.log('✅ Streaming complete. Response length:', fullResponse.length);
       setRecommendations(fullResponse);
       setShowResults(true);
     } catch (error) {
-      console.error('❌ Error getting recommendations:', error);
       setRecommendations(`Sorry, we encountered an error getting recommendations. Please try again.\n\nError: ${error.message}`);
       setShowResults(true);
     } finally {

@@ -119,17 +119,15 @@ const ApplicationGuidance = () => {
                 setGuidance(fullResponse);
               }
             } catch (e) {
-              console.error('Parse error:', e);
+              // Ignore parse errors for non-JSON chunks
             }
           }
         }
       }
 
-      console.log('✅ Streaming complete');
-      setShowResults(true);
+      setLoading(false);
 
     } catch (error) {
-      console.error('❌ Error:', error);
       setGuidance(`Error: ${error.message}\n\nPlease try again.`);
       setShowResults(true);
     } finally {

@@ -18,7 +18,7 @@ const Profile = () => {
       const response = await api.get('/profile');
       setProfile(response.data.user);
     } catch (error) {
-      console.error('Failed to fetch profile:', error);
+      // Silently fail - will show empty form
     } finally {
       setLoading(false);
     }

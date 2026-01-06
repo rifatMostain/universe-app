@@ -89,7 +89,7 @@ const Chatbot = ({ onClose }) => {
         }
       }
     } catch (error) {
-      console.error('Error loading chat history:', error);
+      // Silently fail - user can start fresh conversation
     }
   };
 
@@ -101,7 +101,7 @@ const Chatbot = ({ onClose }) => {
       try {
         await api.post('/ai/save-message', { role, content });
       } catch (error) {
-        console.error('Error saving message to backend:', error);
+        // Continue even if save fails
       }
     }
   };
@@ -230,7 +230,7 @@ const Chatbot = ({ onClose }) => {
                 ));
               }
             } catch (parseError) {
-              console.error('Error parsing chunk:', parseError);
+              // Ignore parse errors
             }
           }
         }

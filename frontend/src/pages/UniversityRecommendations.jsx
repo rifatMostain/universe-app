@@ -104,7 +104,6 @@ const UniversityRecommendations = () => {
         setError(response.data.message || 'Failed to get recommendations');
       }
     } catch (err) {
-      console.error('Error getting recommendations:', err);
       setError(err.response?.data?.message || err.message || 'Failed to get recommendations. Please try again.');
     } finally {
       setLoading(false);

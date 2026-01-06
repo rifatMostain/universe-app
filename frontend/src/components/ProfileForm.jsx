@@ -126,8 +126,6 @@ const ProfileForm = ({ profile, onSave, onCancel }) => {
       const base64Size = (resizedImage.length * 3) / 4; // Approximate size in bytes
       const sizeMB = (base64Size / (1024 * 1024)).toFixed(2);
       
-      console.log(`Image resized. Approximate size: ${sizeMB}MB`);
-      
       setImagePreview(resizedImage);
       setFormData(prev => ({
         ...prev,
@@ -136,7 +134,6 @@ const ProfileForm = ({ profile, onSave, onCancel }) => {
       setUploadingImage(false);
     } catch (err) {
       setError('Failed to process image. Please try again.');
-      console.error('Image processing error:', err);
       setUploadingImage(false);
     }
   };

@@ -51,7 +51,6 @@ const SOPHelper = () => {
       setSuccessMessage('SOP generated successfully! You can now edit and save it.');
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to generate SOP. Please try again.');
-      console.error('Error generating SOP:', err);
     } finally {
       setLoading(false);
     }
@@ -77,7 +76,6 @@ const SOPHelper = () => {
       setSuccessMessage('SOP saved to your account successfully!');
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to save SOP. Please try again.');
-      console.error('Error saving SOP:', err);
     } finally {
       setSaving(false);
     }
