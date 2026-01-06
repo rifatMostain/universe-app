@@ -7,10 +7,6 @@ const applicationGuidanceController = require('../controllers/applicationGuidanc
  * @desc    Get step-by-step application guidance (streaming)
  * @access  Public
  */
-router.post('/', (req, res, next) => {
-  console.log('🔵 Application Guidance POST route hit!');
-  console.log('📦 Request body:', req.body);
-  next();
-}, applicationGuidanceController.getApplicationGuidance);
+router.post('/', applicationGuidanceController.getApplicationGuidance);
 
 module.exports = router;

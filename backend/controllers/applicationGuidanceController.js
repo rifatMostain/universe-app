@@ -24,8 +24,6 @@ exports.getApplicationGuidance = async (req, res) => {
     res.setHeader('Connection', 'keep-alive');
     res.setHeader('X-Accel-Buffering', 'no');
 
-    console.log('🎓 Generating application guidance for:', { country, degree, field, university });
-
     const model = genAI.getGenerativeModel({
       model: 'gemini-2.5-flash',
       generationConfig: {
@@ -140,10 +138,8 @@ Format the output with clear headings, bullet points, and numbered lists for eas
     res.write(`data: [DONE]\n\n`);
     res.end();
 
-    console.log('✅ Application guidance streaming complete');
-
   } catch (error) {
-    console.error('❌ Error generating application guidance:', error);
+    console.error('Application Guidance Error:', error.message);
     
     // If headers not sent, send error response
     if (!res.headersSent) {

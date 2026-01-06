@@ -43,10 +43,6 @@ const authMiddleware = async (req, res, next) => {
         message: 'User not found' 
       });
     }
-
-    // Update last login
-    user.lastLogin = new Date();
-    await user.save();
     
     // Attach user to request object
     req.user = user;
