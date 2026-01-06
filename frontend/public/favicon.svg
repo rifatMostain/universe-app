@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Graduation cap icon in a circle -->
+  <circle cx="50" cy="50" r="48" fill="#059669" stroke="#047857" stroke-width="2"/>
+  
+  <!-- Graduation cap -->
+  <g fill="white">
+    <!-- Cap top -->
+    <polygon points="50,30 70,38 50,46 30,38" />
+    <!-- Cap base -->
+    <path d="M 35 40 L 35 50 Q 35 55 50 57 Q 65 55 65 50 L 65 40" />
+    <!-- Tassel -->
+    <circle cx="70" cy="35" r="2" />
+    <line x1="70" y1="37" x2="70" y2="42" stroke="white" stroke-width="1"/>
+  </g>
+  
+  <!-- Globe/World symbol -->
+  <g stroke="white" stroke-width="1.5" fill="none">
+    <circle cx="50" cy="70" r="12" />
+    <ellipse cx="50" cy="70" rx="5" ry="12" />
+    <line x1="38" y1="70" x2="62" y2="70" />
+  </g>
+</svg>
