@@ -97,4 +97,5 @@ This is a development project. Contributions and suggestions are welcome.
 MIT License
 
 ## Contact
-For more information, please reach out to the development team.
+mostainrifat66@gmail.com
+
